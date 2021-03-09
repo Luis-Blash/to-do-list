@@ -97,7 +97,7 @@ def update_estado(id):
 # DELETE tarea
 @app.route("/tarea/<id>", methods=['DELETE'])
 def delete_tarea(id):
-    mongo.db.usuario.delete_one({"_id":ObjectId(id)})
+    mongo.db.tarea.delete_one({"_id": ObjectId(id)})
     respuesta = jsonify({"mensaje": "Tarea eliminado "})
     return respuesta
 
