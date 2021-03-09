@@ -18,16 +18,22 @@ pip install -r requirements.txt
 ## Rest api 🌎
 ### Rutas
 > /index
+***
 ![alt index](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/index.png "index")
 > GET /tarea
+***
 ![alt get_tarea](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/get_tarea.png "get_tarea")
 > GET /tarea/<id>
+***
 ![alt get_tarea1](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/get_tarea1.png "Get_tarea1")
 > PUT /tarea/<id>
+***
 ![alt put_tarea](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/put_tarea1.png "put_tarea")
 > PUT /tarea-estado/<id>
+***
 ![alt estado_tarea](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/estado.png "estado_tarea")
 > DELETE /tarea/<id>
+***
 ![alt delete_tarea](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/delete_tarea.png "Delete_tarea")
 
 ### Desplegar
