@@ -23,32 +23,32 @@ GET
 or
 /
 ```
-![alt index](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/index.png "index")
+![alt index](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/index.png "index")
 ```bash
 GET
 /tarea
 ```
-![alt get_tarea](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/get_tarea.png "get_tarea")
+![alt get_tarea](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/get_tarea.png "get_tarea")
 ```bash
 GET
 /tarea/<id>
 ```
-![alt get_tarea1](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/get_tarea1.png "Get_tarea1")
+![alt get_tarea1](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/get_tarea1.png "Get_tarea1")
 ```bash
 PUT
 /tarea/<id>
 ```
-![alt put_tarea](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/put_tarea1.png "put_tarea")
+![alt put_tarea](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/put_tarea.png "put_tarea")
 ```bash
 PUT
 /tarea-estado/<id>
 ```
-![alt estado_tarea](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/estado.png "estado_tarea")
+![alt estado_tarea](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/estado.png "estado_tarea")
 ```bash
 DELETE
 /tarea/<id>
 ```
-![alt delete_tarea](https://github.com/Luis-Blash/to-do-list/blob/master/images/backend/delete_tarea.png "Delete_tarea")
+![alt delete_tarea](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/delete_tarea.png "Delete_tarea")
 
 ### Desplegar
 #### Flask
