@@ -5,13 +5,13 @@
 ## Requisitos ✔️
 Instala los modulos a utilizar
 
-```pyton
+```bash
 pip install Flask-PyMongo Flask
 ```
 
 O si lo prefieres pues instalar los requisitos
 
-```pyton
+```bash
 pip install -r requirements.txt
 ```
 
