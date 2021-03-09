@@ -94,6 +94,13 @@ def update_estado(id):
     }})
     return jsonify({"mensaje":"estado modificado"})
 
+# DELETE tarea
+@app.route("/tarea/<id>", methods=['DELETE'])
+def delete_tarea(id):
+    mongo.db.usuario.delete_one({"_id":ObjectId(id)})
+    respuesta = jsonify({"mensaje": "Tarea eliminado "})
+    return respuesta
+
 # http 404
 @app.errorhandler(404)
 def not_found(error=None):
