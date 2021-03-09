@@ -23,8 +23,8 @@ pip install -r requirements.txt
 
 Las herramientas utilizas para su creacion
 
-* [Flask](http://www.dropwizard.io/1.0.2/docs/) - MicroFramework de python
-* [Mongo](http://www.dropwizard.io/1.0.2/docs/) - Base de datos NNoSQL
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/) - MicroFramework de python
+* [Mongo](https://www.mongodb.com/es) - Base de datos NNoSQL
 
 ## Autor
 * **Luis Ocampo** - *Programacion backend* - [luisblash3](https://twitter.com/luisblash3)

@@ -64,7 +64,35 @@ def get_tarea(id):
     respuesta = json_util.dumps(tarea)
     return Response(respuesta, mimetype='application/json')
 
-# PUT 
+# PUT titulo y descripcion
+@app.route("/tarea/<id>", methods=['PUT'])
+def update_tarea(id):
+    # consulta 
+    titulo =  request.json['titulo']
+    descripcion = request.json['descripcion']
+
+    if titulo and descripcion:
+        mongo.db.tarea.update_one({'_id': ObjectId(id)}, {'$set':{
+            "titulo": titulo,
+            "descripcion": descripcion
+        }})
+        respuesta = jsonify({"mensaje":"tarea modificada"})
+        return respuesta
+    else:
+        return jsonify({"mensaje":"No se pudo actualizar"})
+
+# PUT estado
+@app.route("/tarea-estado/<id>", methods=['PUT'])
+def update_estado(id):
+    estado = mongo.db.tarea.find_one({'_id': ObjectId(id)},{"estado":1, "_id":0})
+    if estado['estado']:
+        estado['estado'] = False
+    else: 
+        estado['estado'] = True
+    mongo.db.tarea.update_one({'_id': ObjectId(id)}, {'$set':{
+        "estado": estado['estado']
+    }})
+    return jsonify({"mensaje":"estado modificado"})
 
 # http 404
 @app.errorhandler(404)
