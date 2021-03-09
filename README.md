@@ -50,7 +50,7 @@ DELETE
 ```
 ![alt delete_tarea](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/delete_tarea.png "Delete_tarea")
 
-### Desplegar
+## Desplegar 🚀
 #### Flask
 Para poder desplegar el backend, es dirigir a la carpeta backend, en app.py.
 Dar el siguiente comando
