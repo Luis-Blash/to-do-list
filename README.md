@@ -6,7 +6,7 @@
 Instala los modulos a utilizar
 
 ```bash
-pip install Flask-PyMongo Flask
+pip install Flask-PyMongo Flask flask-cors
 ```
 
 O si lo prefieres pues instalar los requisitos
@@ -24,26 +24,42 @@ or
 /
 ```
 ![alt index](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/index.png "index")
+
+```bash
+POST
+/tarea
+```
+![alt insert_tarea](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/insert_tarea.png "post")
+
+
 ```bash
 GET
 /tarea
 ```
 ![alt get_tarea](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/get_tarea.png "get_tarea")
+
+
 ```bash
 GET
 /tarea/<id>
 ```
 ![alt get_tarea1](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/get_tarea1.png "Get_tarea1")
+
+
 ```bash
 PUT
 /tarea/<id>
 ```
 ![alt put_tarea](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/put_tarea.png "put_tarea")
+
+
 ```bash
 PUT
 /tarea-estado/<id>
 ```
 ![alt estado_tarea](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/estado.png "estado_tarea")
+
+
 ```bash
 DELETE
 /tarea/<id>

@@ -5,9 +5,10 @@ from flask import Flask, jsonify, Response, request
 from flask_pymongo import PyMongo
 from bson import json_util
 from bson.objectid import ObjectId
-import bson
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 
 app.config["MONGO_URI"] = "mongodb://mongo:27017/todolist"
 mongo = PyMongo(app)
@@ -15,11 +16,13 @@ mongo = PyMongo(app)
 # Bienvenida
 @app.route("/index", methods=['GET'])
 @app.route("/", methods=['GET'])
+@cross_origin(supports_credentials=True)
 def index():
     return jsonify({"mensaje":"Bienvenido a To-do List"})
 
 #POST
 @app.route("/tarea", methods=['POST'])
+@cross_origin(supports_credentials=True)
 def insert_tarea():
     """
     titulo
@@ -29,7 +32,7 @@ def insert_tarea():
     """
     titulo = request.json["titulo"]
     descripcion = request.json["descripcion"]
-    estado = request.json["estado"]
+    estado = True
     fecha_creacion = date.today().strftime("%d/%m/%Y")
 
     if titulo and descripcion and estado:
@@ -43,6 +46,8 @@ def insert_tarea():
     
         respuesta =  jsonify({
             "titulo": titulo,
+            "descripcion": descripcion,
+            "estado": estado,
             "fecha_creacion": fecha_creacion
         })
         respuesta.status_code = 201
@@ -52,6 +57,7 @@ def insert_tarea():
 
 # GET todos
 @app.route("/tarea", methods=['GET'])
+@cross_origin(supports_credentials=True)
 def get_tareas():
     consulta = mongo.db.tarea.find()
     respuesta = json_util.dumps(consulta)
@@ -59,6 +65,7 @@ def get_tareas():
 
 #GET uno
 @app.route("/tarea/<id>", methods=['GET'])
+@cross_origin(supports_credentials=True)
 def get_tarea(id):
     tarea = mongo.db.tarea.find_one({"_id":ObjectId(id)})
     respuesta = json_util.dumps(tarea)
@@ -66,6 +73,7 @@ def get_tarea(id):
 
 # PUT titulo y descripcion
 @app.route("/tarea/<id>", methods=['PUT'])
+@cross_origin(supports_credentials=True)
 def update_tarea(id):
     # consulta 
     titulo =  request.json['titulo']
@@ -83,6 +91,7 @@ def update_tarea(id):
 
 # PUT estado
 @app.route("/tarea-estado/<id>", methods=['PUT'])
+@cross_origin(supports_credentials=True)
 def update_estado(id):
     estado = mongo.db.tarea.find_one({'_id': ObjectId(id)},{"estado":1, "_id":0})
     if estado['estado']:
@@ -96,6 +105,7 @@ def update_estado(id):
 
 # DELETE tarea
 @app.route("/tarea/<id>", methods=['DELETE'])
+@cross_origin(supports_credentials=True)
 def delete_tarea(id):
     mongo.db.tarea.delete_one({"_id": ObjectId(id)})
     respuesta = jsonify({"mensaje": "Tarea eliminado "})
@@ -103,6 +113,7 @@ def delete_tarea(id):
 
 # http 404
 @app.errorhandler(404)
+@cross_origin(supports_credentials=True)
 def not_found(error=None):
     respuesta = jsonify({
         "mensaje":"No se encontro: " + request.url,
