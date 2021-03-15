@@ -1,5 +1,5 @@
 from cgi import print_environ
-from datetime import date
+from datetime import date, datetime
 from itertools import count
 from flask import Flask, jsonify, Response, request
 from flask_pymongo import PyMongo
@@ -33,7 +33,9 @@ def insert_tarea():
     titulo = request.json["titulo"]
     descripcion = request.json["descripcion"]
     estado = True
-    fecha_creacion = date.today().strftime("%d/%m/%Y")
+    fecha = datetime.strptime(datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000Z"), "%Y-%m-%dT%H:%M:%S.000Z")
+    print(fecha)
+    fecha_creacion = fecha
 
     if titulo and descripcion and estado:
         # insertar mongo
@@ -101,7 +103,7 @@ def update_estado(id):
     mongo.db.tarea.update_one({'_id': ObjectId(id)}, {'$set':{
         "estado": estado['estado']
     }})
-    return jsonify({"mensaje":"estado modificado"})
+    return jsonify({"mensaje":"estado modificado","estado":estado['estado']})
 
 # DELETE tarea
 @app.route("/tarea/<id>", methods=['DELETE'])
