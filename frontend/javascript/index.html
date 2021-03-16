@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,20 +8,33 @@
     <!--Script-->
     <script src="index.js"></script>
 </head>
-<body>
-    <div id="app" class="preload">
-        <div id="div_tareas">
-            <div class="todas_tareas" id="div_todas_tareas"></div>
-            <div id="ver_tareas" class="no_ver">
-                <h2 id="h2_titulo"></h2>
-                <span id="span_fecha"></span>
-                <p id="p_descripcion"></p>
-                <span id="span_estado"></span>
-                <button id="boton_eliminar"></button>
+<body class="preload">
+    <header>
+        <a href="./insertar.html">Insertar</a>
+    </header>
+    <div class="contenedor" id="app">
+        <div class="flex-dos-columnas">
+            <div id="div_tareas">
+                <div class="todas_tareas" id="div_todas_tareas"></div>
+                <div id="ver_tareas" class="no_ver">
+                    <h2 id="h2_titulo"></h2>
+                    <span id="span_fecha"></span>
+                    <p id="p_descripcion"></p>
+                    <span id="span_estado"></span>
+                    <div class="div_button">
+                        <button id="boton_editar"></button>
+                        <button id="boton_eliminar"></button>
+                    </div>
+                </div>
             </div>
+            <div id="detalles_tareas"></div>
+            <p id="mensaje_fetch" class="no_ver"></p>
         </div>
-        <div id="detalles_tareas"></div>
-        <p id="mensaje_fetch" class="no_ver"></p>
+        <form method="PUT" id="putFormulario" class="no_ver">
+            <input type="text" id="titulo_input">
+            <textarea type="text" id="descripcion_textarea"></textarea>
+            <button type="submit" id="sumbitId">Editar</button>
+        </form>
     </div>
 </body>
 </html>

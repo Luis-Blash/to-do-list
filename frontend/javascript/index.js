@@ -9,17 +9,6 @@ window.addEventListener('load',()=>{
             credentials: "include"
         });
     }
-    // GET ONE
-    function getOne(id){
-        let url = "http://localhost:200/tarea/"+id
-        return fetch(url,{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: "include"
-        });
-    }
     // GET ALL
     function getTodos(){
         return fetch("http://localhost:200/tarea",{
@@ -41,11 +30,11 @@ window.addEventListener('load',()=>{
             credentials: "include"
         });
     }
-    // DELETE tarea
-    function deleteTarea(id){
+    // ID
+    function peticionID(id,metodo) {
         let url = "http://localhost:200/tarea/"+id
         return fetch(url,{
-            method: 'DELETE',
+            method: metodo,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -90,7 +79,7 @@ window.addEventListener('load',()=>{
     
             titulo.innerHTML =  element["titulo"]
             let aux = new Date(element['fecha_creacion']['$date']);
-            fecha.innerHTML =  aux.getDate() + "/" + aux.getMonth() + "/" + aux.getFullYear();
+            fecha.innerHTML =  aux.getDate() + "/" + (aux.getMonth()+1)+ "/" + aux.getFullYear();
             estado.innerHTML = tipoEstado(element["estado"])
             ver.innerHTML = "Ver"
     
@@ -113,7 +102,7 @@ window.addEventListener('load',()=>{
     // boton ver fetch
     function verDetalles(boton,id){
         boton.addEventListener('click', ()=>{
-            getOne(id)
+            peticionID(id,'GET')
             .then(data => data.json())
             .then(tarea => {
                 let ver_tareas = document.getElementById("ver_tareas");
@@ -125,17 +114,21 @@ window.addEventListener('load',()=>{
                 let fecha = document.getElementById("span_fecha");
                 let descripcion = document.getElementById("p_descripcion");
                 let estado = document.getElementById("span_estado");
-                let eliminar = document.getElementById("boton_eliminar")
+                let eliminar = document.getElementById("boton_eliminar");
+                let editar = document.getElementById("boton_editar");
 
                 titulo.innerHTML =  tarea['titulo'];
                 let aux = new Date(tarea['fecha_creacion']['$date']);
                 fecha.innerHTML =  aux.getDate() + "/" + aux.getMonth() + "/" + aux.getFullYear();
                 descripcion.innerHTML = tarea['descripcion'];
-                estado.innerHTML = tipoEstado(tarea["estado"])
-                eliminar.innerHTML = "Eliminar"
+                estado.innerHTML = tipoEstado(tarea["estado"]);
+                eliminar.innerHTML = "Eliminar";
+                editar.innerHTML = "Editar";
 
-                id = tarea['_id']['$oid']
-                eliminarTarea(eliminar,id)
+                id = tarea['_id']['$oid'];
+
+                eliminarTarea(eliminar,id);
+                editarTarea(editar,id);
             })
         })
     }
@@ -163,7 +156,7 @@ window.addEventListener('load',()=>{
     // Eliminar fetch
     function eliminarTarea(boton,id) {
         boton.addEventListener('click', ()=>{
-            deleteTarea(id)
+            peticionID(id,'DELETE')
             .then(response => response.json())
             .then(respuesta => {
                 let mensaje_fetch = document.getElementById("mensaje_fetch");
@@ -174,5 +167,41 @@ window.addEventListener('load',()=>{
             })
         })
     }
-    
+
+    // Editar
+    const form = document.getElementById("putFormulario");
+    function editarTarea(boton,id) {
+        boton.addEventListener('click',()=>{
+            let form = document.getElementById("putFormulario");
+            peticionID(id,'GET')
+            .then(data => data.json())
+            .then(respuesta => {
+                form.classList.remove = "no_ver";
+                form.className = "ver";
+                document.getElementById("titulo_input").value = respuesta['titulo'];
+                document.getElementById("descripcion_textarea").value = respuesta['descripcion'];
+                document.getElementById("sumbitId").value = respuesta['_id']['$oid'];
+            })
+        });
+    }
+    // PUT edit
+    form.addEventListener("submit",(e)=>{
+        let url = "http://localhost:200/tarea/" + document.getElementById("sumbitId").value;
+        if(document.getElementById("titulo_input").value != ""){
+            fetch(url,{
+                method: 'PUT',
+                body: JSON.stringify({
+                    "titulo": document.getElementById("titulo_input").value,
+                    "descripcion":document.getElementById("descripcion_textarea").value
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: "include"
+            }).then((json))
+            .then(respuesta => {
+                console.log(respuesta)
+            });
+        }
+    })
 });
