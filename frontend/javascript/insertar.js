@@ -1,4 +1,5 @@
 window.addEventListener('load', ()=>{
+    const URL_BACKEND = "http://localhost:5000/";
     // Formulario
     let form = document.getElementById("postFormulario");
     // Evento de formulario
@@ -14,7 +15,7 @@ window.addEventListener('load', ()=>{
     });
     // Mandar datos fetch
     function insertForm(json) {
-        fetch("http://localhost:200/tarea",{
+        fetch((URL_BACKEND+"tarea"),{
             method: 'POST',
             body: JSON.stringify(json),
             headers: {

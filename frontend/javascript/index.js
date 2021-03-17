@@ -1,7 +1,8 @@
 window.addEventListener('load',()=>{
+    const URL_BACKEND = "http://localhost:5000/";
     // Index
     function index(){
-        return fetch("http://localhost:200/",{
+        return fetch(URL_BACKEND,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -11,7 +12,7 @@ window.addEventListener('load',()=>{
     }
     // GET ALL
     function getTodos(){
-        return fetch("http://localhost:200/tarea",{
+        return fetch((URL_BACKEND + "tarea"),{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,7 +22,7 @@ window.addEventListener('load',()=>{
     }
     // PUT estado
     function putEstado(id){
-        let url = "http://localhost:200/tarea-estado/"+id
+        let url = URL_BACKEND + "tarea-estado/"+id
         return fetch(url,{
             method: 'PUT',
             headers: {
@@ -30,9 +31,21 @@ window.addEventListener('load',()=>{
             credentials: "include"
         });
     }
+    // PUT Titulo,Descripcion
+    function putDatos(id,datos) {
+        let url = URL_BACKEND+"tarea/"+id
+        return fetch(url,{
+            method: 'PUT',
+            body: JSON.stringify(datos),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: "include"
+        })
+    }
     // ID
     function peticionID(id,metodo) {
-        let url = "http://localhost:200/tarea/"+id
+        let url = URL_BACKEND+"tarea/"+id
         return fetch(url,{
             method: metodo,
             headers: {
@@ -76,8 +89,9 @@ window.addEventListener('load',()=>{
             let fecha = document.createElement("p")
             let estado = document.createElement("button")
             let ver = document.createElement("button")
-    
-            titulo.innerHTML =  element["titulo"]
+
+            indivual_tareas.id = element['_id']['$oid'];
+            titulo.innerHTML =  element["titulo"];
             let aux = new Date(element['fecha_creacion']['$date']);
             fecha.innerHTML =  aux.getDate() + "/" + (aux.getMonth()+1)+ "/" + aux.getFullYear();
             estado.innerHTML = tipoEstado(element["estado"])
@@ -105,6 +119,8 @@ window.addEventListener('load',()=>{
             peticionID(id,'GET')
             .then(data => data.json())
             .then(tarea => {
+                let form = document.getElementById("putFormulario");
+                form.className = "no_ver";
                 let ver_tareas = document.getElementById("ver_tareas");
                 ver_tareas.classList.remove("no_ver");
                 let mensaje_fetch = document.getElementById("mensaje_fetch");
@@ -160,6 +176,10 @@ window.addEventListener('load',()=>{
             .then(response => response.json())
             .then(respuesta => {
                 let mensaje_fetch = document.getElementById("mensaje_fetch");
+                let tarea_vista = document.getElementById(id);
+                let form = document.getElementById("putFormulario");
+                form.className = "no_ver";
+                tarea_vista.remove();
                 mensaje_fetch.classList.remove("no_ver");
                 mensaje_fetch.innerHTML = respuesta['mensaje'];
                 let ver_tareas = document.getElementById("ver_tareas");
@@ -177,7 +197,7 @@ window.addEventListener('load',()=>{
             .then(data => data.json())
             .then(respuesta => {
                 form.classList.remove = "no_ver";
-                form.className = "ver";
+                form.className = "formulario";
                 document.getElementById("titulo_input").value = respuesta['titulo'];
                 document.getElementById("descripcion_textarea").value = respuesta['descripcion'];
                 document.getElementById("sumbitId").value = respuesta['_id']['$oid'];
@@ -186,22 +206,14 @@ window.addEventListener('load',()=>{
     }
     // PUT edit
     form.addEventListener("submit",(e)=>{
-        let url = "http://localhost:200/tarea/" + document.getElementById("sumbitId").value;
-        if(document.getElementById("titulo_input").value != ""){
-            fetch(url,{
-                method: 'PUT',
-                body: JSON.stringify({
-                    "titulo": document.getElementById("titulo_input").value,
-                    "descripcion":document.getElementById("descripcion_textarea").value
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: "include"
-            }).then((json))
-            .then(respuesta => {
-                console.log(respuesta)
-            });
+        //e.preventDefault()
+        if(document.getElementById("sumbitId").value != ""){
+            let id = document.getElementById("sumbitId").value;
+            let datos = {
+                "titulo": document.getElementById("titulo_input").value,
+                "descripcion": document.getElementById("descripcion_textarea").value
+            }
+            putDatos(id,datos);
         }
     })
 });

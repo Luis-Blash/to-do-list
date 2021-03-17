@@ -66,6 +66,16 @@ DELETE
 ```
 ![alt delete_tarea](https://github.com/Luis-Blash/to-do-list/blob/main/images/backend/delete_tarea.png "Delete_tarea")
 
+## FrontEnd 🖥
+### Javascript 
+Usando el metodo Fetch que de manera fácil y lógica de obtener recursos de forma asíncrona por la red.
+En la carpeta */frontend/javascript*
+Se encuentra un archivo el cual hace las peticiones de CRUD, no olvides cambiar el url de donde tomara las peticiones HTTP en los archivos *index.js* y *insertar.js*
+```javascript
+const URL_BACKEND = "http://localhost:5000/";
+```
+![alt Desde_js](https://github.com/Luis-Blash/to-do-list/blob/main/images/js/desde_js.png "Desde_js")
+
 ## Desplegar 🚀
 #### Flask
 Para poder desplegar el backend, es dirigir a la carpeta backend, en app.py.

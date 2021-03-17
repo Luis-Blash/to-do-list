@@ -1,0 +1,66 @@
+* { 
+    padding:0;
+    margin:0;
+}
+a{
+    text-decoration: none;
+    color: green;
+}
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.no_ver{
+    visibility: hidden;
+}
+
+.contenedor{
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+#div_tareas{
+    display: flex;
+}
+
+#div_tareas div{
+    flex-basis: calc(50% - 1rem);
+}
+
+.todas_tareas{
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 10px 0px 0px #ccc;
+}
+
+.indivual_tareas{
+    margin: 15px 0;
+    flex-basis: calc(50% - 1rem);
+}
+
+#ver_tareas{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario > *{
+    width: 50%;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+.formulario textarea{
+    resize: none;
+    min-height: 200px;
+}
