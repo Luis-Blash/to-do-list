@@ -13,31 +13,17 @@
 </head>
 
 <body class="preload">
-    <header>
-        <div id="app"></div>
-        <a href="./insertar.html">Insertar</a>
-    </header>
-    <div class="contenedor">
-        <div id="div_tareas">
-            <div class="todas_tareas" id="div_todas_tareas"></div>
-            <div id="ver_tareas" class="no_ver">
-                <h2 id="h2_titulo"></h2>
-                <span id="span_fecha"></span>
-                <p id="p_descripcion"></p>
-                <span id="span_estado"></span>
-                <div class="div_button">
-                    <button id="boton_editar"></button>
-                    <button id="boton_eliminar"></button>
-                </div>
-            </div>
-        </div>
-        <p id="mensaje_fetch" class="no_ver"></p>
-        <form method="PUT" id="putFormulario" class="no_ver">
-            <input type="text" id="titulo_input">
-            <textarea type="text" id="descripcion_textarea"></textarea>
-            <button type="submit" id="sumbitId">Editar</button>
-        </form>
-    </div>
+    <!-- Titulo apu-->
+    <h1 id="titulo_api"></h1>
+    <!-- Form de Post-->
+    <form class="formulario" id="postFormulario" enctype="multipart/form-data" method="POST">
+        <input type="text" name="titulo_post" id="titulo_post" placeholder="Insertar titulo">
+        <input type="text" name="descripcion_post" id="descripcion_post" placeholder="Descripcion"></input>
+        <button type="submit" value="">Mandar</button>
+    </form>
+    <!-- Mensaje de fetch -->
+    <p id="mensaje_fetch" class="no_ver"></p>
+    <!-- Get ALL todas las tareas -->
+    <div class="todas_las_tareas" id="todas_las_tareas"></div>
 </body>
-
 </html>
