@@ -6,3 +6,122 @@ a{
     text-decoration: none;
     color: green;
 }
+
+body{
+    background: rgb(3, 3, 3);
+    color: white;
+}
+
+.contenedor{
+    margin: 0 auto;
+    width: 80%;
+}
+
+.contenedor h1{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.formulario{
+    width: 55%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+input[type="text"]{
+    background: rgba(255, 255, 255, 0);
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: #3f8eb3;
+    border-radius: 15px;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    font-size: 15px;
+}
+
+input[type="text"]:focus,
+button:focus{
+    outline: none;
+}
+input[type="text"]::placeholder{
+    color: rgb(136, 136, 136);
+}
+
+button{
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 15px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 48, 51);
+    font-size: 15px;
+    margin-right: 25px;
+}
+
+/** Todas las tareas**/
+.botones,
+.titulo_tareas,
+.descripcion_tareas{
+    padding: 5px;
+    text-align: center;
+}
+
+/* Informacion individuales*/
+.informacion_tareas{
+    border-bottom: solid #3f8eb3;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.titulo_tareas{
+    width: 20%;
+    border-right: solid #9cd3ecf3;
+}
+
+.titulo_tareas h2{
+    font-size: 18px;
+}
+.titulo_tareas span{
+    color: #ccc;
+    font-size: 15px;
+}
+
+.descripcion_tareas{
+    width: 48%;
+    border-right: solid #9cd3ecf3;
+}
+
+.botones{
+    width:35%;
+}
+
+.botones button{
+    font-size: 13px;
+}
+
+/* Formualrio put*/
+.tareas_individuales form{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.tareas_individuales form input[type="text"]{
+    margin-right: 55px;
+}
+.Activo {
+    color: rgb(112, 255, 112);
+}
+
+.Acabado {
+    color: rgb(245, 110, 110);
+}
+/**
+Mensaje fetch
+**/
+
+#mensaje_fetch{
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 15px;
+}

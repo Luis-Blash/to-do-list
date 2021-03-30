@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-    const URL_BACKEND = "http://localhost:5000/";
+    const URL_BACKEND = "http://192.168.100.31:5000/";
     const MENSAJE_FETCH = document.getElementById('mensaje_fetch');
     //Index
     fetch(URL_BACKEND, {
@@ -33,7 +33,7 @@ window.addEventListener("load", () => {
         })
         .then(data => data.json())
         .then(respuesta => {
-            MENSAJE_FETCH.innerHTML = "Se Inserto a la base";
+            MENSAJE_FETCH.innerHTML = "Creada = "+ respuesta["titulo"]+ " ||| el dia = "+respuesta["fecha_creacion"];
             formulario_post.reset();
         })
         .catch((error) => console.log(error));
@@ -58,8 +58,14 @@ window.addEventListener("load", () => {
             let tareas_individuales = document.createElement('div');
             tareas_individuales.className = 'tareas_individuales';
             tareas_individuales.id = id+"tarea";
+            let informacion_tareas = document.createElement('div');
+            informacion_tareas.className = 'informacion_tareas';
+            informacion_tareas.id = id+"tarea_info";
             // Agregar tareas individuales a todas_las_tareas
             todas_las_tareas.append(tareas_individuales);
+            // agrear informacion tareas a tareas individuales el cual es un div
+            // para poder agregar debajo el formulario
+            tareas_individuales.append(informacion_tareas);
             // Creando etiquetas div
             let titulo_tareas = document.createElement('div');
             titulo_tareas.className = 'titulo_tareas';
@@ -68,9 +74,9 @@ window.addEventListener("load", () => {
             let botones = document.createElement('div');
             botones.className = 'botones';
             // Agregar las etiquetas creadas a todas las tareas_individuales
-            tareas_individuales.append(titulo_tareas);
-            tareas_individuales.append(descripcion_tareas);
-            tareas_individuales.append(botones);
+            informacion_tareas.append(titulo_tareas);
+            informacion_tareas.append(descripcion_tareas);
+            informacion_tareas.append(botones);
 
             // crear etiquetas que estaran en div titulo tareas
             let h2 = document.createElement('h2');
@@ -88,7 +94,7 @@ window.addEventListener("load", () => {
             // Metodo para poner activado o finalizado
             p.innerHTML = element['descripcion'];
 
-            let estado = tipoEstado(respuesta['estado']);
+            let estado = tipoEstado(element['estado']);
             button1.innerHTML = "Editar";
             button1.id = id+"1";
             button1.addEventListener('click',()=>{crearFormularioParaEditar(id)});
@@ -152,7 +158,7 @@ window.addEventListener("load", () => {
         .then(data => data.json())
         .then(respuesta => {
             // Donde se crear el formulario
-            let tareas_individual = document.getElementById((id+"formulario"));
+            let tareas_individual = document.getElementById((id+"tarea"));
             if(document.getElementById(id+'put') == null){
                 // Crear etiquetas
                 let formulario_put = document.createElement('form');

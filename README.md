@@ -6,7 +6,7 @@
 Instala los modulos a utilizar
 
 ```bash
-pip install Flask-PyMongo Flask flask-cors
+pip install Flask-PyMongo Flask flask-cors python-dotenv
 ```
 
 O si lo prefieres pues instalar los requisitos
@@ -16,6 +16,10 @@ pip install -r requirements.txt
 ```
 
 ## Rest api 🌎
+### Iniciarlo
+```bash
+flask run --host 0.0.0.0
+```
 ### Rutas
 ```bash
 GET

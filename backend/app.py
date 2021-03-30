@@ -6,10 +6,13 @@ from flask_pymongo import PyMongo
 from bson import json_util
 from bson.objectid import ObjectId
 from flask_cors import CORS, cross_origin
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
-
+#print(os.getenv("FLASK_ENV"))
 app.config["MONGO_URI"] = "mongodb://localhost:300/todolist"
 mongo = PyMongo(app)
 
@@ -125,5 +128,5 @@ def not_found(error=None):
     return respuesta
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000)
 
