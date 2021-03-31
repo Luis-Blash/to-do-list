@@ -1,4 +1,5 @@
 * { 
+    box-sizing: border-box;
     padding:0;
     margin:0;
 }
@@ -12,6 +13,34 @@ body{
     color: white;
 }
 
+.preload{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: #3f8eb3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+.preload h1{
+    animation: movimientoCarga 1s ease infinite alternate;
+}
+
+@keyframes movimientoCarga {
+    from{
+        transform: translateY(0px);
+    }
+    to{
+        transform: translateY(-50px);
+    }
+}
+
+.preload_finish{
+    opacity: 0;
+    pointer-events: none;
+}
 .contenedor{
     margin: 0 auto;
     width: 80%;

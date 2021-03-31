@@ -14,11 +14,17 @@ O si lo prefieres pues instalar los requisitos
 ```bash
 pip install -r requirements.txt
 ```
+## Desplegar 🚀
+#### Flask
+Para poder desplegar el backend, es dirigir a la carpeta backend, en app.py.
+Dar el siguiente comando
+
+```bash
+python app.py
+```
 
 ## Rest api 🌎
-### Iniciarlo
-```bash
-flask run --host 0.0.0.0
+
 ```
 ### Rutas
 ```bash
@@ -80,14 +86,7 @@ const URL_BACKEND = "http://localhost:5000/";
 ```
 ![alt Desde_js](https://github.com/Luis-Blash/to-do-list/blob/main/images/js/desde_js.png "Desde_js")
 
-## Desplegar 🚀
-#### Flask
-Para poder desplegar el backend, es dirigir a la carpeta backend, en app.py.
-Dar el siguiente comando
 
-```bash
-python app.py
-```
 ## Construido con: 🛠
 
 Las herramientas utilizas para su creacion

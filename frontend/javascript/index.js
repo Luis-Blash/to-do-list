@@ -1,6 +1,18 @@
 window.addEventListener("load", () => {
     const URL_BACKEND = "http://192.168.100.31:5000/";
     const MENSAJE_FETCH = document.getElementById('mensaje_fetch');
+    const PRELOAD = document.querySelector(".preload");
+    let COMPROBAR =  false;
+    let espera =  setInterval(quitarPreload,100);
+    function quitarPreload() {
+        if(COMPROBAR){
+            PRELOAD.classList.add("preload_finish");
+            clearInterval(espera);
+            setTimeout(() => {
+                PRELOAD.remove();
+            }, 1000);
+        }
+    }
     //Index
     fetch(URL_BACKEND, {
         method: "GET",
@@ -13,7 +25,10 @@ window.addEventListener("load", () => {
     .then((respuesta) => {
         let titulo_api = document.getElementById("titulo_api");
         titulo_api.innerHTML = respuesta["mensaje"];
-    }).catch((error) => console.log(error));
+    }).catch((error) => {
+        PRELOAD.childNodes[1].innerHTML = "Inactivo el servidor";
+    });
+
 
     // Insertar fetch
     let formulario_post = document.getElementById("postFormulario");
@@ -50,74 +65,81 @@ window.addEventListener("load", () => {
     .then(data => data.json())
     // Aqui se crea la etiquetas de las tareas individuales
     .then(respuesta => {
-        respuesta.forEach(element => {
-            //id 
-            let id = element['_id']['$oid'];
-            // Detectar id de la etiqueta todas las tareas 
-            let todas_las_tareas = document.getElementById('todas_las_tareas');
-            let tareas_individuales = document.createElement('div');
-            tareas_individuales.className = 'tareas_individuales';
-            tareas_individuales.id = id+"tarea";
-            let informacion_tareas = document.createElement('div');
-            informacion_tareas.className = 'informacion_tareas';
-            informacion_tareas.id = id+"tarea_info";
-            // Agregar tareas individuales a todas_las_tareas
-            todas_las_tareas.append(tareas_individuales);
-            // agrear informacion tareas a tareas individuales el cual es un div
-            // para poder agregar debajo el formulario
-            tareas_individuales.append(informacion_tareas);
-            // Creando etiquetas div
-            let titulo_tareas = document.createElement('div');
-            titulo_tareas.className = 'titulo_tareas';
-            let descripcion_tareas = document.createElement('div');
-            descripcion_tareas.className = 'descripcion_tareas';
-            let botones = document.createElement('div');
-            botones.className = 'botones';
-            // Agregar las etiquetas creadas a todas las tareas_individuales
-            informacion_tareas.append(titulo_tareas);
-            informacion_tareas.append(descripcion_tareas);
-            informacion_tareas.append(botones);
-
-            // crear etiquetas que estaran en div titulo tareas
-            let h2 = document.createElement('h2');
-            let span1 = document.createElement('span');
-            // crear etiquetas que estaran en div descripcion tareas
-            let p = document.createElement('p');
-            // crear etiquetas que estaran en div botones
-            let button1 = document.createElement('button');
-            let button2 = document.createElement('button');
-            let button3 = document.createElement('button');
-
-            h2.innerHTML = element['titulo'];
-            let aux = new Date(element['fecha_creacion']['$date']);
-            span1.innerHTML = aux.getDate() + "/" + (aux.getMonth()+1)+ "/" + aux.getFullYear();
-            // Metodo para poner activado o finalizado
-            p.innerHTML = element['descripcion'];
-
-            let estado = tipoEstado(element['estado']);
-            button1.innerHTML = "Editar";
-            button1.id = id+"1";
-            button1.addEventListener('click',()=>{crearFormularioParaEditar(id)});
-
-            button2.id = id+"2";
-            button2.innerHTML = estado;
-            button2.classList = estado;
-            button2.addEventListener('click',()=>{cambioEstado(id)});
-
-            button3.className = "eliminar-boton";
-            button3.innerHTML = "Eliminar";
-            button3.addEventListener("click",()=>{eliminarTarea(id)});
-
-            
-            // agrego a etiquetas a sus respectivos div
-            titulo_tareas.append(h2);
-            titulo_tareas.append(span1);
-            descripcion_tareas.append(p);
-            botones.append(button1);
-            botones.append(button2);
-            botones.append(button3);
-        });
-    }).catch((error) => console.error(error));
+        if(respuesta == []){
+            COMPROBAR = true;
+        }else{
+            COMPROBAR = true;
+            respuesta.forEach(element => {
+                //id 
+                let id = element['_id']['$oid'];
+                // Detectar id de la etiqueta todas las tareas 
+                let todas_las_tareas = document.getElementById('todas_las_tareas');
+                let tareas_individuales = document.createElement('div');
+                tareas_individuales.className = 'tareas_individuales';
+                tareas_individuales.id = id+"tarea";
+                let informacion_tareas = document.createElement('div');
+                informacion_tareas.className = 'informacion_tareas';
+                informacion_tareas.id = id+"tarea_info";
+                // Agregar tareas individuales a todas_las_tareas
+                todas_las_tareas.append(tareas_individuales);
+                // agrear informacion tareas a tareas individuales el cual es un div
+                // para poder agregar debajo el formulario
+                tareas_individuales.append(informacion_tareas);
+                // Creando etiquetas div
+                let titulo_tareas = document.createElement('div');
+                titulo_tareas.className = 'titulo_tareas';
+                let descripcion_tareas = document.createElement('div');
+                descripcion_tareas.className = 'descripcion_tareas';
+                let botones = document.createElement('div');
+                botones.className = 'botones';
+                // Agregar las etiquetas creadas a todas las tareas_individuales
+                informacion_tareas.append(titulo_tareas);
+                informacion_tareas.append(descripcion_tareas);
+                informacion_tareas.append(botones);
+    
+                // crear etiquetas que estaran en div titulo tareas
+                let h2 = document.createElement('h2');
+                let span1 = document.createElement('span');
+                // crear etiquetas que estaran en div descripcion tareas
+                let p = document.createElement('p');
+                // crear etiquetas que estaran en div botones
+                let button1 = document.createElement('button');
+                let button2 = document.createElement('button');
+                let button3 = document.createElement('button');
+    
+                h2.innerHTML = element['titulo'];
+                let aux = new Date(element['fecha_creacion']['$date']);
+                span1.innerHTML = aux.getDate() + "/" + (aux.getMonth()+1)+ "/" + aux.getFullYear();
+                // Metodo para poner activado o finalizado
+                p.innerHTML = element['descripcion'];
+    
+                let estado = tipoEstado(element['estado']);
+                button1.innerHTML = "Editar";
+                button1.id = id+"1";
+                button1.addEventListener('click',()=>{crearFormularioParaEditar(id)});
+    
+                button2.id = id+"2";
+                button2.innerHTML = estado;
+                button2.classList = estado;
+                button2.addEventListener('click',()=>{cambioEstado(id)});
+    
+                button3.className = "eliminar-boton";
+                button3.innerHTML = "Eliminar";
+                button3.addEventListener("click",()=>{eliminarTarea(id)});
+    
+                
+                // agrego a etiquetas a sus respectivos div
+                titulo_tareas.append(h2);
+                titulo_tareas.append(span1);
+                descripcion_tareas.append(p);
+                botones.append(button1);
+                botones.append(button2);
+                botones.append(button3);
+            });
+        }
+    }).catch((error) => {
+        PRELOAD.childNodes[1].innerHTML = "No se pudo obtener los datos";
+    });
 
 
     // Detecta que tipo de estado y en vez de decir true o false, pone un texto
